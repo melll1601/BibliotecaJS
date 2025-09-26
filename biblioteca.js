@@ -24,6 +24,15 @@ export const livroAtualizado = {
 
 
 export function adicionarLivro() {
+
+    const livroCadastrado =  catalogo.some(l => l.titulo.toLowerCase === livro.titulo.toLowerCase) ;
+
+    if(livroCadastrado){
+        console.log(" ");
+        console.log("[ERRO, LIVRO JÁ CADASTRADO]");
+        return;
+    }
+
      livro.id = proximoId++;
      catalogo.push({...livro});
 
