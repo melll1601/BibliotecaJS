@@ -2,7 +2,25 @@
 export const catalogo= [];
 let proximoId = 1; // contador de IDs
 
-import { livro} from './app.js';
+
+export const livro = {
+     id : null,
+     titulo : null,
+     autor : null,
+     anoPublicacao : null,
+     genero : null,
+     disponivel : null
+};
+
+export const livroAtualizado = {
+    id : null,
+    titulo : null,
+    autor : null,
+    anoPublicacao : null,
+    genero :null,
+    disponivel : null,
+
+};
 
 
 export function adicionarLivro() {
@@ -32,6 +50,29 @@ export function editarLivro(livroEncontrado, livroAtualizado) {
     console.log("[LIVRO ATUALIZADO COM SUCESSO]");
 }
 
+
+export function alterarDisponibilidade(livroEncontrado, disponivel) {
+
+    if (!livroEncontrado) {
+        console.log("Livro não encontrado!");
+        return;
+    }
+
+    Object.assign(livroEncontrado, { disponivel });
+    console.log("[DISPONIBILIDADE DO LIVRO ATUALIZADA COM SUCESSO]");
+}
+
+
+export function removerLivro(indiceParaRemover) {
+    if (indiceParaRemover === -1) {
+        console.log("Livro não encontrado!");
+        return;
+    }
+
+    catalogo.splice(indiceParaRemover, 1);
+    console.log("[LIVRO REMOVIDO COM SUCESSO]");
+
+}
 
 export function sairSistema(){
     console.log("[ENCERRANDO SISTEMA...]");

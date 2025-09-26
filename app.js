@@ -1,27 +1,8 @@
 import promptSync from 'prompt-sync';
 const prompt = promptSync();
 
-import { adicionarLivro, buscarLivro, editarLivro, listarLivros, sairSistema, catalogo } from './biblioteca.js';
+import { adicionarLivro, buscarLivro, editarLivro, listarLivros, sairSistema, catalogo, alterarDisponibilidade, removerLivro, livro, livroAtualizado } from './biblioteca.js';
 
-
-export const livro = {
-     id : null,
-     titulo : null,
-     autor : null,
-     anoPublicacao : null,
-     genero : null,
-     disponivel : null
-};
-
-export const livroAtualizado = {
-    id : null,
-    titulo : null,
-    autor : null,
-    anoPublicacao : null,
-    genero :null,
-    disponivel : null,
-
-};
 
 let escolha;
 
@@ -113,6 +94,29 @@ while(escolha != 0){
                 console.log("Livro não encontrado.");
             }
             break;
+
+        case 5: 
+            console.log(" ");
+            console.log("[ALTERAR DISPONIBILIDADE DO LIVRO]");
+            const idDisp = parseInt(prompt("| Digite o ID do livro que deseja alterar a disponibilidade: "));
+            const livroEncontradoDisp = catalogo.find(l => l.id === idDisp);
+
+            if(livroEncontradoDisp){
+                livroAtualizado.disponivel = prompt("| O livro está disponível? (s/n): ").toLowerCase() === 's';
+                alterarDisponibilidade(livroEncontradoDisp, livroAtualizado.disponivel);
+            }
+
+        case 6:
+            console.log(" ");
+            console.log("[REMOVER LIVRO]");
+            const idRemover = parseInt(prompt("| Digite o ID do livro que deseja remover: "));
+            const index = catalogo.findIndex(l => l.id === idRemover);
+    
+            removerLivro(index);
+            break;
+
+        case 7:
+
     }
 
 }
