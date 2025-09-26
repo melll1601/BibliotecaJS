@@ -1,7 +1,7 @@
 import promptSync from 'prompt-sync';
 const prompt = promptSync();
 
-import { adicionarLivro, buscarLivro, editarLivro, listarLivros, sairSistema, catalogo, alterarDisponibilidade, removerLivro, livro, livroAtualizado } from './biblioteca.js';
+import { adicionarLivro, buscarLivro, editarLivro, listarLivros, sairSistema, catalogo, alterarDisponibilidade, removerLivro, livro, livroAtualizado, listarDisponiveis, listarGenero, buscarAutor } from './biblioteca.js';
 
 
 let escolha;
@@ -106,6 +106,8 @@ while(escolha != 0){
                 alterarDisponibilidade(livroEncontradoDisp, livroAtualizado.disponivel);
             }
 
+            break;
+
         case 6:
             console.log(" ");
             console.log("[REMOVER LIVRO]");
@@ -116,8 +118,48 @@ while(escolha != 0){
             break;
 
         case 7:
+            console.log(" ");
+            console.log("|----------------------|");
+            console.log("|    FILTRAR LIVROS    |");
+            console.log("|----------------------|");
+            console.log("| 1- Disponibilidade   |");
+            console.log("|----------------------|");
+            console.log("| 2- Gênero            |");
+            console.log("|----------------------|");
 
-    }
+            const opcaoListar = parseInt(prompt("[OPÇÃO ESCOLHIDA] -> "));
+
+            switch(opcaoListar){
+
+                case 1:
+                    console.log(" ");
+                    console.log("[FILTRAR POR DISPONIBILIDADE]");
+
+                    listarDisponiveis();
+                    break;
+
+                case 2:
+                    console.log(" ");
+                    console.log("[FILTRAR POR GÊNERO]");
+                    const generoBusca = prompt("| Digite o gênero que deseja buscar: ").toLowerCase();
+
+                    listarGenero(generoBusca);
+                    break;
+            }
+
+
+            break;
+
+            case 8:
+                console.log(" ");
+                console.log("[BUSCAR POR AUTOR]")
+
+                const pesquisaAutor = prompt("| Digite o nome do autor que deseja buscar: ").toLowerCase();
+
+                buscarAutor(pesquisaAutor);
+                break;
+
+        }
 
 }
 

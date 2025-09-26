@@ -74,6 +74,35 @@ export function removerLivro(indiceParaRemover) {
 
 }
 
+export function listarDisponiveis() {
+    const disponiveis = catalogo.filter(livro => livro.disponivel);
+
+    if(!disponivel){
+        console.log("| - Nenhum livro disponível");
+    }else{
+    console.log(disponiveis);
+    }
+}
+
+export function listarGenero(genero) {
+
+    if(!genero){
+        console.log("| - Nenhum livro encontrado");
+    }else{
+        const filtrados = catalogo.filter(livro => livro.genero.toLowerCase() === genero.toLowerCase());
+        console.log(filtrados);
+    }
+}
+
+export function buscarAutor(autor) {
+
+    const resultado = catalogo.filter(
+    livro => livro.autor.toLowerCase().includes(autor)
+    );
+    
+    console.log(resultado);
+}
+
 export function sairSistema(){
     console.log("[ENCERRANDO SISTEMA...]");
 }
