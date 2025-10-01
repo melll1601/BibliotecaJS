@@ -104,8 +104,8 @@ while(escolha != 0){
                 const livroEncontradoDisp = catalogo.find(l => l.id === idDisp);
 
                 if(livroEncontradoDisp){
-                    livroAtualizado.disponivel = prompt("| O livro está disponível? (s/n): ").toLowerCase() === 's';
-                    alterarDisponibilidade(livroEncontradoDisp, livroAtualizado.disponivel);
+                    const disponivel = prompt("| O livro está disponível? (s/n): ").toLowerCase() === 's';
+                    alterarDisponibilidade(livroEncontradoDisp, disponivel);
                 }
 
             break;
@@ -141,6 +141,7 @@ while(escolha != 0){
                         console.log("[FILTRAR POR DISPONIBILIDADE]");
 
                         listarDisponiveis();
+
                     break;
 
                     case 2:
@@ -212,6 +213,7 @@ while(escolha != 0){
 
                         break;
                     }
+                break;
                 
             case 0:
                 console.log("");

@@ -34,7 +34,7 @@ export const emprestimo = {
 
 export function adicionarLivro() {
 
-    const livroCadastrado =  catalogo.some(l => l.titulo.toLowerCase === livro.titulo.toLowerCase) ;
+    const livroCadastrado =  catalogo.some(l => l.titulo.toLowerCase() === livro.titulo.toLowerCase());
 
     if(livroCadastrado){
         console.log(" ");
@@ -45,7 +45,6 @@ export function adicionarLivro() {
     livro.id = proximoId++;
     catalogo.push({...livro});
 
-    console.log(livro);
     console.log("[LIVRO ADICIONADO COM SUCESSO]");
 }
 
@@ -97,7 +96,7 @@ export function removerLivro(indiceParaRemover) {
 export function listarDisponiveis() {
     const disponiveis = catalogo.filter(livro => livro.disponivel);
 
-    if(!disponivel){
+    if(!disponiveis){
         console.log("| - Nenhum livro disponível");
     }else{
     console.log(disponiveis);
@@ -154,6 +153,8 @@ export function emprestarLivro() {
     Emprestimo.push({...emprestimo});
 
     console.log("[EMPRÉSTIMO REALIZADO COM SUCESSO]");
+    console.log(" ");
+    
     alterarDisponibilidade(livroEncontrado, false);
 
     }else{
