@@ -1,15 +1,17 @@
 
 export const catalogo= [];
-let proximoId = 1; // contador de IDs
+export const Emprestimo= [];
+
+let proximoId = 1; 
 
 
 export const livro = {
-     id : null,
-     titulo : null,
-     autor : null,
-     anoPublicacao : null,
-     genero : null,
-     disponivel : null
+    id : null,
+    titulo : null,
+    autor : null,
+    anoPublicacao : null,
+    genero : null,
+    disponivel : null
 };
 
 export const livroAtualizado = {
@@ -19,7 +21,14 @@ export const livroAtualizado = {
     anoPublicacao : null,
     genero :null,
     disponivel : null,
+};
 
+export const emprestimo = {
+    id: null,
+    nomeCliente: null,
+    livroEmprestado: null,
+    dataEmprestimo: null,
+    dataDevolucao: null,
 };
 
 
@@ -33,16 +42,18 @@ export function adicionarLivro() {
         return;
     }
 
-     livro.id = proximoId++;
-     catalogo.push({...livro});
+    livro.id = proximoId++;
+    catalogo.push({...livro});
 
     console.log(livro);
     console.log("[LIVRO ADICIONADO COM SUCESSO]");
 }
 
+
 export function listarLivros() {
     console.log(catalogo);
 }
+
 
 export function buscarLivro(titulo) {
     return catalogo.find(livro => livro.titulo === titulo);
@@ -80,8 +91,8 @@ export function removerLivro(indiceParaRemover) {
 
     catalogo.splice(indiceParaRemover, 1);
     console.log("[LIVRO REMOVIDO COM SUCESSO]");
-
 }
+
 
 export function listarDisponiveis() {
     const disponiveis = catalogo.filter(livro => livro.disponivel);
@@ -93,6 +104,7 @@ export function listarDisponiveis() {
     }
 }
 
+
 export function listarGenero(genero) {
 
     if(!genero){
@@ -103,6 +115,7 @@ export function listarGenero(genero) {
     }
 }
 
+
 export function buscarAutor(autor) {
 
     const resultado = catalogo.filter(
@@ -112,7 +125,50 @@ export function buscarAutor(autor) {
     console.log(resultado);
 }
 
+
+export function ordenarAno() {
+
+
+    for (let i = 0; i < catalogo.length - 1; i++) {
+
+        const ordenados = [...catalogo].sort((a, b) => a.anoPublicacao - b.anoPublicacao);
+        ordenados.forEach(livro => console.log(livro));
+    }
+}
+
+
+export function emprestarLivro() {
+    const emprestimoFeito = Emprestimo.some(e => e.livroEmprestado.toLowerCase() == emprestimo.livroEmprestado.toLowerCase());
+
+    if(emprestimoFeito){
+        console.log(" ");
+        console.log("[LIVRO JÁ CADASTRADO]");
+        return;
+    }
+
+    const livroEncontrado = catalogo.find(l => l.titulo.toLowerCase() === emprestimo.livroEmprestado.toLowerCase());
+
+
+    if(livroEncontrado && livroEncontrado.disponivel){
+    emprestimo.id = proximoId++;
+    Emprestimo.push({...emprestimo});
+
+    console.log("[EMPRÉSTIMO REALIZADO COM SUCESSO]");
+    alterarDisponibilidade(livroEncontrado, false);
+
+    }else{
+        console.log(" ");
+        console.log("[LIVRO NÃO DISPONÍVEL PARA EMPRÉSTIMO]");
+        return;
+    }
+}   
+
+
+export function listarEmprestimos() {
+    console.log(Emprestimo);
+}
+
+
 export function sairSistema(){
     console.log("[ENCERRANDO SISTEMA...]");
 }
-
